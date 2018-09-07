@@ -14,7 +14,6 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true" >
 
-<!--
         <activity android:name=".Login.SplashActivity"
             android:configChanges="orientation"
             android:screenOrientation="landscape"
@@ -24,19 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
--->
 
-        <activity android:name=".ArduinoTestActivity_ina">
-            <intent-filter>
-                    <action android:name="android.intent.action.MAIN" />
-                    <category android:name="android.intent.category.LAUNCHER" />
-                   <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED"
-                android:resource="@xml/device_filter" />
-        </activity>
 
         <activity android:name=".BaseActivity"
             android:configChanges="orientation"
@@ -58,12 +45,6 @@
         <activity android:name=".MenuActivity"
             android:configChanges="orientation"
             android:screenOrientation="landscape"/>
-        <activity android:name=".ConsumeMenuActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="landscape"/>
-        <activity android:name=".RecordConsumeActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="landscape"/>
 
         <activity android:name=".TimeDateActivity"
             android:configChanges="orientation"
@@ -71,9 +52,6 @@
 
 
         <activity android:name=".ContainerSelectActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="landscape"/>
-        <activity android:name=".RecordLiquidActivity"
             android:configChanges="orientation"
             android:screenOrientation="landscape"/>
         <activity android:name=".StoolActivity"
@@ -99,10 +77,6 @@
             android:configChanges="orientation"
             android:screenOrientation="landscape">
         </activity>
-
-        <activity android:name=".PreActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="landscape"/>
 
         <!--
         <activity

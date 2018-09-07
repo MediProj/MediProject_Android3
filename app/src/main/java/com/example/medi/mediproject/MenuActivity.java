@@ -9,7 +9,7 @@ import android.widget.Toast;
 import com.example.medi.mediproject.Login.MainActivity;
 
 public class MenuActivity extends BaseActivity {
-    TextView tv,tv_stool, tv_urine, tv_consume,tv_report;
+    TextView tv,tv_stool, tv_urine,tv_report;
     TextView bt_prev;
     String name,pid,pk;
 
@@ -24,7 +24,6 @@ public class MenuActivity extends BaseActivity {
         tv =findViewById(R.id.tv);
         tv_stool=findViewById(R.id.stool);
         tv_urine=findViewById(R.id.urine);
-        tv_consume=findViewById(R.id.consume);
         tv_report =findViewById(R.id.report);
         bt_prev=findViewById(R.id.Bnt_logout);
 
@@ -58,16 +57,6 @@ public class MenuActivity extends BaseActivity {
             }
         });
 
-        //Consume
-        tv_consume.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent2 = new Intent(MenuActivity.this,TimeDateActivity.class);
-                intent2.putExtra("val",2);
-                intent2.putExtra("pid", pid);
-                startActivity(intent2);
-            }
-        });
 
         //Report
         tv_report.setOnClickListener(new View.OnClickListener() {

@@ -89,12 +89,6 @@
             android:text="소변" />
 
         <TextView
-            android:id="@+id/consume"
-            style="@style/MenuButton"
-            android:backgroundTint="@color/Green"
-            android:text="섭취량" />
-
-        <TextView
             android:id="@+id/report"
             style="@style/MenuButton"
             android:backgroundTint="@color/Green"

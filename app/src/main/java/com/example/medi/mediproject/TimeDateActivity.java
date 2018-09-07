@@ -136,11 +136,7 @@ public class TimeDateActivity extends BaseActivity {
                         startActivity(intent2);
                     }
 
-                    else if(page_id==2) {
-                        Intent intent2 = new Intent(TimeDateActivity.this,ConsumeMenuActivity.class);
-                        intent2.putExtra("pid", pid);
-                        startActivity(intent2);
-                    }
+
 
                 }
             }

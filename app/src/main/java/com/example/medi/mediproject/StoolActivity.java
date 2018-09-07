@@ -26,16 +26,12 @@ public class StoolActivity extends BaseActivity {
 
         final Intent intent = getIntent();
         pid=intent.getStringExtra("pid");
-        String tmp_time = intent.getStringExtra("time");
         String stool_type = intent.getStringExtra("type");
 
         name = MediValues.patientData.get(pid).get("name");
-        time = "2015-08-15T19:40:31+09:00";
-
         TextView title_pname = findViewById(R.id.p_name);
         title_pname.setText(name+" 님");
 
-        tv1.setText(tmp_time +"에 ");
         tv2.setText(stool_type + " 대변 1회를 기록합니다");
 
         //next bnt 텍스트 수전

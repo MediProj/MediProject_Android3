@@ -84,7 +84,7 @@ public class ReportActivity extends BaseActivity {
         list = new ArrayList<ReportItem>();
         listView = findViewById(R.id.ReportList);
 
-        tv_report_title.setText(name + "님의 "+ str_date + "기록 입니다");
+        tv_report_title.setText(name + "님의 기록 입니다");
 
 
         //임시로
