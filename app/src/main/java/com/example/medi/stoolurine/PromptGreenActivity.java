@@ -1,4 +1,4 @@
-package com.example.medi.mediproject;
+package com.example.medi.stoolurine;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,12 +6,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class PromptDiaperActivity extends BaseActivity {
+public class PromptGreenActivity extends BaseActivity {
     String pid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_prompt_diaper);
+        setContentView(R.layout.activity_prompt_green);
 
         Intent intent = getIntent();
         pid = intent.getStringExtra("pid");
@@ -25,13 +26,13 @@ public class PromptDiaperActivity extends BaseActivity {
     }
 
     public void onPrevClick(View view) {
-        Intent intent = new Intent(PromptDiaperActivity.this, ContainerSelectActivity.class);
+        Intent intent = new Intent(PromptGreenActivity.this, ContainerSelectActivity.class);
         intent.putExtra("pid", pid);
         startActivity(intent);
     }
 
     public void onNextClick(View view) {
-        Intent intent = new Intent(PromptDiaperActivity.this, RecordUrineActivity.class);
+        Intent intent = new Intent(PromptGreenActivity.this, RecordUrineActivity.class);
         intent.putExtra("pid", pid);
         startActivity(intent);
     }
