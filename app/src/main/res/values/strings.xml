@@ -39,4 +39,10 @@
     <string name="alertPick">선택 버튼을 눌러주세요.</string>
     <string name="alertWrong">현재 날짜/시간을 초과하였습니다.</string>
 
+    <!-- Record Delete AlertDialog -->
+    <string name="delTitle">주의! 의료 기록 삭제</string>
+    <string name="delPrompt">의료 기록의 삭제는 영구적입니다. 선택하신 의료 기록을 삭제하시겠습니까?</string>
+    <string name="btnConfirm">삭제</string>
+    <string name="btnCancel">취소</string>
+
 </resources>
