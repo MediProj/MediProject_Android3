@@ -160,7 +160,7 @@ public class RecordUrineActivity extends BaseActivity {
         setContentView(R.layout.activity_record_urine);
 
         Intent intent = getIntent();
-        final String pid = intent.getStringExtra("pid");
+        final String pid = MediValues.pid;
         final String  name = MediValues.patientData.get(pid).get("name");
         TextView title_pname = findViewById(R.id.p_name);
         title_pname.setText(name+" 님");

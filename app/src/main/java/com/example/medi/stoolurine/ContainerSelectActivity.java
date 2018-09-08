@@ -20,7 +20,7 @@ public class ContainerSelectActivity extends BaseActivity {
         setContentView(R.layout.activity_container);
 
         Intent intent = getIntent();
-        pid = intent.getStringExtra("pid");
+        pid = MediValues.pid;
 
         String name= MediValues.patientData.get(pid).get("name");
         TextView title_pname = findViewById(R.id.p_name);

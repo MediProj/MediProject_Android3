@@ -12,6 +12,7 @@ public class MediValues {
     public static String mediTime;
     public static Map<String, String> patientRecord[];
     public static String[] pkRecordTag;
+    public static String pid;
 
     static final int INPUT = 1;
     static final int OUTPUT = 2;

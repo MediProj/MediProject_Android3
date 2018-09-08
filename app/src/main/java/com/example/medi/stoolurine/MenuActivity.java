@@ -20,7 +20,7 @@ public class MenuActivity extends BaseActivity {
         final Intent intent=getIntent();
 
         //Patient Info (name/number)
-        pid= intent.getStringExtra("pid");
+        pid= MediValues.pid;
         tv =findViewById(R.id.tv);
         tv_stool=findViewById(R.id.stool);
         tv_urine=findViewById(R.id.urine);

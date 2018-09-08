@@ -25,7 +25,7 @@ public class StoolActivity extends BaseActivity {
         tv2=findViewById(R.id.tv2);
 
         final Intent intent = getIntent();
-        pid=intent.getStringExtra("pid");
+        pid=MediValues.pid;
         String stool_type = intent.getStringExtra("type");
 
         name = MediValues.patientData.get(pid).get("name");
