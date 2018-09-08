@@ -3,7 +3,8 @@
     package="com.example.medi.stoolurine">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-feature android:name="android.hardware.usb.host" />
+    <uses-feature android:name="android.hardware.usb.host"
+        android:required="true"/>
 
     <application
         android:allowBackup="true"
@@ -42,6 +43,7 @@
         <activity android:name=".Login.MainActivity"
             android:configChanges="orientation"
             android:screenOrientation="landscape"/>
+
         <activity android:name=".MenuActivity"
             android:configChanges="orientation"
             android:screenOrientation="landscape"/>
@@ -78,59 +80,11 @@
             android:screenOrientation="landscape">
         </activity>
 
-        <!--
-        <activity
-            android:name=".ContainerSelectActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="landscape" >
 
-        </activity>
-
-        <activity
-            android:name=".PromptBottleActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="landscape">
-        </activity>
-
-        <activity
-            android:name=".PromptDiaperActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="landscape">
-        </activity>
-
-        <activity
-            android:name=".PromptGreenActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="landscape">
-        </activity>
-
-        <activity
-            android:name=".RecordLiquidActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="landscape">
-        </activity>
-
-        <activity
-            android:name=".RecordUrineActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="landscape">
-        </activity>
-
-
-        <activity android:name=".MenuActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="landscape"/>
-        <activity android:name=".TimeDateActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="landscape"/>
-        <activity android:name=".StoolActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="landscape"/>
-        <activity android:name=".ReportActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="landscape"/>
-        -->
-
+        <service
+            android:name="com.example.medi.stoolurine.UsbService"
+            android:enabled="true">
+        </service>
     </application>
 
 </manifest>

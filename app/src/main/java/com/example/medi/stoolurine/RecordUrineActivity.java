@@ -1,22 +1,15 @@
 package com.example.medi.stoolurine;
 
-import android.app.Activity;
-import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
-import android.hardware.usb.UsbDevice;
-import android.hardware.usb.UsbDeviceConnection;
-import android.hardware.usb.UsbManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -24,20 +17,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.medi.mediproject.UsbService;
-import com.felhr.usbserial.UsbSerialDevice;
-import com.felhr.usbserial.UsbSerialInterface;
-
-import java.io.UnsupportedEncodingException;
 import java.lang.ref.WeakReference;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
 
 public class RecordUrineActivity extends BaseActivity {
     boolean connected = false;
     static EditText print_weight;
-    String weight = "";
     /*
      * Notifications from UsbService will be received here.
      */
@@ -107,7 +92,6 @@ public class RecordUrineActivity extends BaseActivity {
                         | View.SYSTEM_UI_FLAG_IMMERSIVE);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
-
     @Override
     public void onResume() {
         super.onResume();
@@ -164,14 +148,12 @@ public class RecordUrineActivity extends BaseActivity {
             switch (msg.what) {
                 case UsbService.MESSAGE_FROM_SERIAL_PORT:
                     String data = (String) msg.obj;
+                    mActivity.get().print_weight.append(data);
 
-                    //mActivity.get().display.append(data);
-                    mActivity.get().print_weight.setText(data);
                     break;
             }
         }
     }
-
 
     public void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
@@ -180,6 +162,8 @@ public class RecordUrineActivity extends BaseActivity {
         Intent intent = getIntent();
         final String pid = intent.getStringExtra("pid");
         final String  name = MediValues.patientData.get(pid).get("name");
+        TextView title_pname = findViewById(R.id.p_name);
+        title_pname.setText(name+" 님");
 
         View decorView = getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
@@ -199,13 +183,10 @@ public class RecordUrineActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 if (!connected) {
-
                     Toast.makeText(getApplicationContext(), "저울과 연결이 필요합니다", Toast.LENGTH_SHORT).show();
                 } else {
-                    String data = "1'";
-                    if (usbService != null) { // if UsbService was correctly binded, Send data
-                        usbService.write(data.getBytes());
-                    }
+                    String data = "1";
+                    usbService.write(data.getBytes());
                 }
             }
         });
@@ -214,16 +195,17 @@ public class RecordUrineActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 String tmp = (print_weight.getText().toString());
+                tmp.replace("ready", "");
 
                 if (tmp.matches(""))
                     Toast.makeText(getApplicationContext(), "잘못된 무게값입니다", Toast.LENGTH_SHORT).show();
 
-                else if(Integer.parseInt(tmp)<=0)
+                else if(Float.parseFloat(tmp)<=0)
                     Toast.makeText(getApplicationContext(), "잘못된 무게값입니다", Toast.LENGTH_SHORT).show();
 
                 else {
                     Toast.makeText(getApplicationContext(), tmp + "g의 소변이 등록되었습니다", Toast.LENGTH_SHORT).show();
-                    MediPostRequest postRequest = new MediPostRequest(v.getContext(), pid, name,MediValues.OUTPUT, MediValues.STOOL, (float)Integer.parseInt(tmp), null );
+                    MediPostRequest postRequest = new MediPostRequest(v.getContext(), pid, name,MediValues.OUTPUT, MediValues.URINE, Float.parseFloat(tmp), null );
                     Intent intent = new Intent(RecordUrineActivity.this, ReportActivity.class);
                     intent.putExtra("pid", pid);
                     startActivity(intent);

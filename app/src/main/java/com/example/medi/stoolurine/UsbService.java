@@ -1,4 +1,4 @@
-package com.example.medi.mediproject;
+package com.example.medi.stoolurine;
 
 import android.app.PendingIntent;
 import android.app.Service;
@@ -46,7 +46,6 @@ public class UsbService extends Service {
     private UsbDevice device;
     private UsbDeviceConnection connection;
     private UsbSerialDevice serialPort;
-
     private boolean serialPortConnected;
     /*
      *  Data received from serial port will be received here. Just populate onReceivedData with your code
@@ -138,8 +137,9 @@ public class UsbService extends Service {
      * This function will be called from MainActivity to write data through Serial Port
      */
     public void write(byte[] data) {
-        if (serialPort != null)
+        if (serialPort != null) {
             serialPort.write(data);
+        }
     }
 
     public void setHandler(Handler mHandler) {
@@ -241,4 +241,3 @@ public class UsbService extends Service {
         }
     }
 }
-
