@@ -156,6 +156,7 @@ public class ReportActivity extends BaseActivity {
                 holder.tv_val1=view.findViewById(R.id.val1);
                 holder.tv_val2=view.findViewById(R.id.val2);
                 holder.bt_del = view.findViewById(R.id.btn_delete);
+                holder.bt_edit=view.findViewById(R.id.btn_edit);
                 view.setTag(holder);
             }
             else{
@@ -197,13 +198,21 @@ public class ReportActivity extends BaseActivity {
                 }
             });
 
+            holder.bt_edit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(ReportActivity.this, EditRecordActivity.class );
+                    intent.putExtra("pk", MediValues.pkRecordTag[i]);
+                    startActivity(intent);
+                }
+            });
             return view;
         }
     }
 
     public class ViewHolder {
         TextView tv_time,tv_tag, tv_val1,tv_val2;
-        Button bt_del;
+        Button bt_del, bt_edit;
     }
 
     protected void getPatientRecords() {

@@ -70,7 +70,7 @@ public class RecordUrineActivity extends BaseActivity {
         }
     };
 
-
+/*
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
@@ -92,6 +92,8 @@ public class RecordUrineActivity extends BaseActivity {
                         | View.SYSTEM_UI_FLAG_IMMERSIVE);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
+
+  */
     @Override
     public void onResume() {
         super.onResume();
@@ -149,7 +151,6 @@ public class RecordUrineActivity extends BaseActivity {
                 case UsbService.MESSAGE_FROM_SERIAL_PORT:
                     String data = (String) msg.obj;
                     mActivity.get().print_weight.append(data);
-
                     break;
             }
         }
@@ -165,12 +166,14 @@ public class RecordUrineActivity extends BaseActivity {
         TextView title_pname = findViewById(R.id.p_name);
         title_pname.setText(name+" 님");
 
+        /*
         View decorView = getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_IMMERSIVE;
         decorView.setSystemUiVisibility(uiOptions);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        */
         mHandler = new MyHandler(this);
 
         Button bt_start = findViewById(R.id.askWeight);
