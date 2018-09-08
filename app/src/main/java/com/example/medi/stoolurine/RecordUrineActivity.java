@@ -189,8 +189,8 @@ public class RecordUrineActivity extends BaseActivity {
 
         Button bt_start = findViewById(R.id.askWeight);
         print_weight =  findViewById(R.id.weightPrint);
-        Button bt_next = findViewById(R.id.Bnt_next);
-        Button bt_prev = findViewById(R.id.Bnt_prev);
+        Button bt_next = findViewById(R.id.Btn_next);
+        Button bt_prev = findViewById(R.id.Btn_prev);
 
         //측정시작
         bt_start.setOnClickListener(new View.OnClickListener() {
