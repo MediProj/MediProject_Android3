@@ -22,7 +22,7 @@ public class TimeDateActivity extends BaseActivity {
     TimePicker pickTime;
 
     String name =null;
-    String pid,str_pk;
+    String pid;
     int page_id=0;
     int year, month, day, hour, minute, second;
 
@@ -50,7 +50,6 @@ public class TimeDateActivity extends BaseActivity {
         page_id= intent.getIntExtra("val",0);
         pid = intent.getStringExtra("pid");
         name = MediValues.patientData.get(pid).get("name");
-        str_pk = MediValues.patientData.get(pid).get("pk");
 
         TextView title_pname = findViewById(R.id.p_name);
         title_pname.setText(name+" 님");
@@ -60,9 +59,6 @@ public class TimeDateActivity extends BaseActivity {
 
         else if(page_id==1)
             tv.setText("소변을 보신 날짜/시간을 선택하고 다음 버튼을 눌러주세요");
-
-        else if(page_id==2)
-            tv.setText("날짜/시간을 선택하고 다음 버튼을 눌러주세요");
 
         res.setText(R.string.promptPick);
 
@@ -135,9 +131,6 @@ public class TimeDateActivity extends BaseActivity {
                         intent2.putExtra("pid", pid);
                         startActivity(intent2);
                     }
-
-
-
                 }
             }
         });

@@ -37,7 +37,7 @@ import java.util.Set;
 public class RecordUrineActivity extends BaseActivity {
     boolean connected = false;
     static EditText print_weight;
-    String weight="";
+    String weight = "";
     /*
      * Notifications from UsbService will be received here.
      */
@@ -47,23 +47,23 @@ public class RecordUrineActivity extends BaseActivity {
             switch (intent.getAction()) {
                 case UsbService.ACTION_USB_PERMISSION_GRANTED: // USB PERMISSION GRANTED
                     Toast.makeText(context, "측정 버튼을 눌러주세요", Toast.LENGTH_SHORT).show();
-                    connected=true;
+                    connected = true;
                     break;
 
                 case UsbService.ACTION_USB_PERMISSION_NOT_GRANTED: // USB PERMISSION NOT GRANTED
-                    connected=false;
+                    connected = false;
                     Toast.makeText(context, "저울과 연결이 필요합니다", Toast.LENGTH_SHORT).show();
                     break;
                 case UsbService.ACTION_NO_USB: // NO USB CONNECTED
-                    connected=false;
+                    connected = false;
                     Toast.makeText(context, "저울과 연결이 필요합니다", Toast.LENGTH_SHORT).show();
                     break;
                 case UsbService.ACTION_USB_DISCONNECTED: // USB DISCONNECTED
-                    connected=false;
+                    connected = false;
                     Toast.makeText(context, "저울과 연결이 필요합니다", Toast.LENGTH_SHORT).show();
                     break;
                 case UsbService.ACTION_USB_NOT_SUPPORTED: // USB NOT SUPPORTED
-                    connected=false;
+                    connected = false;
                     Toast.makeText(context, "저울과 연결이 필요합니다", Toast.LENGTH_SHORT).show();
                     break;
             }
@@ -107,6 +107,7 @@ public class RecordUrineActivity extends BaseActivity {
                         | View.SYSTEM_UI_FLAG_IMMERSIVE);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -172,7 +173,7 @@ public class RecordUrineActivity extends BaseActivity {
     }
 
 
-    public void onCreate(Bundle savedInstance){
+    public void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
         setContentView(R.layout.activity_record_urine);
 
@@ -188,7 +189,7 @@ public class RecordUrineActivity extends BaseActivity {
         mHandler = new MyHandler(this);
 
         Button bt_start = findViewById(R.id.askWeight);
-        print_weight =  findViewById(R.id.weightPrint);
+        print_weight = findViewById(R.id.weightPrint);
         Button bt_next = findViewById(R.id.Bnt_next);
         Button bt_prev = findViewById(R.id.Bnt_prev);
 
@@ -196,11 +197,11 @@ public class RecordUrineActivity extends BaseActivity {
         bt_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!connected)
-                    Toast.makeText(getApplicationContext(),"저울과 연결이 필요합니다",Toast.LENGTH_SHORT).show();
+                if (!connected) {
 
-                else{
-                    String data="1'";
+                    Toast.makeText(getApplicationContext(), "저울과 연결이 필요합니다", Toast.LENGTH_SHORT).show();
+                } else {
+                    String data = "1'";
                     if (usbService != null) { // if UsbService was correctly binded, Send data
                         usbService.write(data.getBytes());
                     }
@@ -217,7 +218,7 @@ public class RecordUrineActivity extends BaseActivity {
 
 
                 else {
-                    Toast.makeText(getApplicationContext(),tmp + "g의 소변이 등록되었습니다", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), tmp + "g의 소변이 등록되었습니다", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(RecordUrineActivity.this, ReportActivity.class);
                     intent.putExtra("pid", pid);
                     startActivity(intent);
