@@ -188,7 +188,26 @@ public class ReportActivity extends BaseActivity {
                 @Override
                 public void onClick(View view) {
                     MediDeleteRequest delRecord = new MediDeleteRequest(MediValues.pkRecordTag[i], getApplicationContext());
-                    getPatientRecords();
+
+                    final ProgressDialog progress = new ProgressDialog(ReportActivity.this);
+
+                    progress.setTitle("로딩중");
+                    progress.setMessage("기록 삭제 중입니다...");
+                    progress.setCancelable(false);
+                    progress.show();
+
+                    MediValues.patientRecord = null;
+                    MediValues.pkRecordTag = null;
+                    list.clear();
+
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            progress.dismiss();
+                            getPatientRecords();
+                        }
+                    }, 5000);
                 }
             });
 
