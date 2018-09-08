@@ -24,6 +24,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.medi.mediproject.UsbService;
 import com.felhr.usbserial.UsbSerialDevice;
 import com.felhr.usbserial.UsbSerialInterface;
 
@@ -213,6 +214,7 @@ public class RecordUrineActivity extends BaseActivity {
                 String tmp = (print_weight.getText().toString());
                 if (tmp == null || tmp == "" || Float.parseFloat(tmp) <= 0)
                     Toast.makeText(getApplicationContext(), "잘못된 무게값입니다", Toast.LENGTH_SHORT).show();
+
 
                 else {
                     Toast.makeText(getApplicationContext(),tmp + "g의 소변이 등록되었습니다", Toast.LENGTH_SHORT).show();
