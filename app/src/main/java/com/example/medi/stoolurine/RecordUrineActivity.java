@@ -179,6 +179,7 @@ public class RecordUrineActivity extends BaseActivity {
 
         Intent intent = getIntent();
         final String pid = intent.getStringExtra("pid");
+        final String  name = MediValues.patientData.get(pid).get("name");
 
         View decorView = getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
@@ -213,12 +214,16 @@ public class RecordUrineActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 String tmp = (print_weight.getText().toString());
-                if (tmp == null || tmp == "" || Float.parseFloat(tmp) <= 0)
+
+                if (tmp.matches(""))
                     Toast.makeText(getApplicationContext(), "잘못된 무게값입니다", Toast.LENGTH_SHORT).show();
 
+                else if(Integer.parseInt(tmp)<=0)
+                    Toast.makeText(getApplicationContext(), "잘못된 무게값입니다", Toast.LENGTH_SHORT).show();
 
                 else {
                     Toast.makeText(getApplicationContext(), tmp + "g의 소변이 등록되었습니다", Toast.LENGTH_SHORT).show();
+                    MediPostRequest postRequest = new MediPostRequest(v.getContext(), pid, name,MediValues.OUTPUT, MediValues.STOOL, (float)Integer.parseInt(tmp), null );
                     Intent intent = new Intent(RecordUrineActivity.this, ReportActivity.class);
                     intent.putExtra("pid", pid);
                     startActivity(intent);
