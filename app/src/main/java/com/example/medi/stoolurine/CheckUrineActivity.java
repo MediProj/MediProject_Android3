@@ -22,7 +22,6 @@ public class CheckUrineActivity extends BaseActivity {
         TextView title_pname = findViewById(R.id.p_name);
         title_pname.setText(name+" 님");
 
-
         final RadioButton c1 = findViewById(R.id.c1);
         final RadioButton c2 = findViewById(R.id.c2);
         final RadioButton c3 = findViewById(R.id.c3);
