@@ -1,4 +1,4 @@
-package com.example.medi.mediproject;
+package com.example.medi.stoolurine;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.medi.mediproject.Login.MainActivity;
+import com.example.medi.stoolurine.Login.MainActivity;
 
 public class MenuActivity extends BaseActivity {
     TextView tv,tv_stool, tv_urine,tv_report;

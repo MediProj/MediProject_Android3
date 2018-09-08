@@ -1,4 +1,4 @@
-package com.example.medi.mediproject;
+package com.example.medi.stoolurine;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,16 +6,14 @@ import android.view.View;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-public class CheckStoolActivity extends BaseActivity {
+public class CheckUrineActivity extends BaseActivity {
+     String pid;
+    int type =1;
+    String str_type;
 
-    String str_type="";
-    int type=1;
-    String pid;
-
-    @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_stool_check);
+        setContentView(R.layout.activity_urine_check);
 
         Intent intent = getIntent();
         pid = intent.getStringExtra("pid");
@@ -23,6 +21,7 @@ public class CheckStoolActivity extends BaseActivity {
         String name= MediValues.patientData.get(pid).get("name");
         TextView title_pname = findViewById(R.id.p_name);
         title_pname.setText(name+" 님");
+
 
         final RadioButton c1 = findViewById(R.id.c1);
         final RadioButton c2 = findViewById(R.id.c2);
@@ -36,10 +35,10 @@ public class CheckStoolActivity extends BaseActivity {
                     type = 1;
                     str_type = "정상";
                 } else if (c2.isChecked()) {
-                    str_type = "혈변";
+                    str_type = "혈뇨";
                     type = 2;
                 } else if (c3.isChecked()) {
-                    str_type = "설사 ";
+                    str_type = "거품뇨 ";
                     type = 3;
                 } else {
                     type = 4;
@@ -52,14 +51,14 @@ public class CheckStoolActivity extends BaseActivity {
     }
 
     public void onPrevClick(View view) {
-        Intent intent = new Intent(CheckStoolActivity.this, TimeDateActivity.class);
+        Intent intent = new Intent(CheckUrineActivity.this, TimeDateActivity.class);
         intent.putExtra("pid",pid);
-        intent.putExtra("val", 0);
+        intent.putExtra("val",1);
         startActivity(intent);
     }
 
     public void onNextClick(View view) {
-        Intent intent = new Intent(CheckStoolActivity.this, StoolActivity.class);
+        Intent intent = new Intent(CheckUrineActivity.this,  ContainerSelectActivity.class);
         intent.putExtra("pid",pid);
         intent.putExtra("type", str_type);
         startActivity(intent);

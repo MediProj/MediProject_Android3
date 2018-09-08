@@ -1,4 +1,4 @@
-package com.example.medi.mediproject.Login;
+package com.example.medi.stoolurine.Login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,8 +13,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
-import com.example.medi.mediproject.BaseActivity;
-import com.example.medi.mediproject.MediValues;
+import com.example.medi.stoolurine.BaseActivity;
+import com.example.medi.stoolurine.MediValues;
 
 import org.json.JSONArray;
 import org.json.JSONException;

@@ -1,4 +1,4 @@
-package com.example.medi.mediproject;
+package com.example.medi.stoolurine;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

@@ -1,4 +1,4 @@
-package com.example.medi.mediproject;
+package com.example.medi.stoolurine;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
