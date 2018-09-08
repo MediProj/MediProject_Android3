@@ -48,7 +48,7 @@ public class ReportActivity extends BaseActivity {
 
         //patient info
         final Intent intent = getIntent();
-        pid = intent.getStringExtra("pid");
+        pid = MediValues.pid;
         name = MediValues.patientData.get(pid).get("name");
         pk = MediValues.patientData.get(pid).get("pk");
 

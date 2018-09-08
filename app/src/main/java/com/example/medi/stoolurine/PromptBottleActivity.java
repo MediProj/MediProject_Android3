@@ -15,7 +15,7 @@ public class PromptBottleActivity extends BaseActivity {
         setContentView(R.layout.activity_prompt_bottle);
 
         Intent intent = getIntent();
-        pid = intent.getStringExtra("pid");
+        pid = MediValues.pid;
 
         if(pid!=null) {
             String name = MediValues.patientData.get(pid).get("name");

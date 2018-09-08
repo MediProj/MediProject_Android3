@@ -48,7 +48,7 @@ public class TimeDateActivity extends BaseActivity {
         //title 표시
         final Intent intent = getIntent();
         page_id= intent.getIntExtra("val",0);
-        pid = intent.getStringExtra("pid");
+        pid = MediValues.pid;
         name = MediValues.patientData.get(pid).get("name");
 
         TextView title_pname = findViewById(R.id.p_name);

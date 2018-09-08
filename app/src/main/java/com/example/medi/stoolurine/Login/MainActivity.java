@@ -38,6 +38,7 @@ public class MainActivity extends BaseActivity {
 
                 else {
                     intent.putExtra("pid", p_num.getText().toString());
+                    MediValues.pid = p_num.getText().toString();
                     startActivity(intent);
                 }
             }
