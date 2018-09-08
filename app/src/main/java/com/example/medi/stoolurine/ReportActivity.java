@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -78,6 +79,11 @@ public class ReportActivity extends BaseActivity {
         bt_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                MediValues.patientRecord = null;
+                MediValues.pkRecordTag = null;
+                list.clear();
+
+                getPatientRecords();
             }
         });
 
@@ -175,6 +181,8 @@ public class ReportActivity extends BaseActivity {
 
         public void showDialog(Activity activity, final int index) {
             final Dialog dialog = new Dialog(activity);
+            dialog.setCancelable(false);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             dialog.setContentView(R.layout.record_delete_prompt);
 
             Button delCancel = (Button) dialog.findViewById(R.id.delCancel);
@@ -218,9 +226,6 @@ public class ReportActivity extends BaseActivity {
 
             //Show the dialog!
             dialog.show();
-
-            dialog.setTitle(R.string.delTitle);
-            dialog.setCancelable(false);
 
             //Set the dialog to immersive
             dialog.getWindow().getDecorView().setSystemUiVisibility(
