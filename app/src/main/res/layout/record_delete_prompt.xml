@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="4"
+    android:orientation="vertical"
+    android:background="#004B87">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="3"
+        android:text="@string/delPrompt"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
+        android:textAlignment="center"
+        android:gravity="center_vertical"
+        android:layout_margin="5dp"
+        android:background="#10ffffff"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/delCancel"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/btnCancel"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:textColor="#FFFFFF"
+            android:background="#457b80"
+            android:layout_margin="5dp"/>
+
+        <Button
+            android:id="@+id/delConfirm"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/btnConfirm"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:textColor="#FFFFFF"
+            android:background="#8e0606"
+            android:layout_margin="5dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>
