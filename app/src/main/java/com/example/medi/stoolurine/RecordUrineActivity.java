@@ -70,7 +70,6 @@ public class RecordUrineActivity extends BaseActivity {
         }
     };
 
-/*
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
@@ -93,7 +92,7 @@ public class RecordUrineActivity extends BaseActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
-  */
+
     @Override
     public void onResume() {
         super.onResume();
@@ -165,32 +164,47 @@ public class RecordUrineActivity extends BaseActivity {
         final String  name = MediValues.patientData.get(pid).get("name");
         TextView title_pname = findViewById(R.id.p_name);
         title_pname.setText(name+" 님");
+        TextView tv = findViewById(R.id.tv);
 
-        /*
+        tv.setText("무게를 직접 입력하거나, 측정 버튼을 눌러 무게를 측정하세요\n( 영점 조절버튼은 저울에 아무것도 올려놓지 않은 상태에서 눌러주세요 )");
+
         View decorView = getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_IMMERSIVE;
         decorView.setSystemUiVisibility(uiOptions);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        */
+
         mHandler = new MyHandler(this);
 
         Button bt_start = findViewById(R.id.askWeight);
         print_weight = findViewById(R.id.weightPrint);
+        Button bt_zero = findViewById(R.id.setZero);
         Button bt_next = findViewById(R.id.Btn_next);
         Button bt_prev = findViewById(R.id.Btn_prev);
+
+        bt_zero.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (usbService.isServiceConnected()) {
+                    String data = "0";
+                    usbService.write(data.getBytes());
+                } else
+                    Toast.makeText(getApplicationContext(), "저울과 연결이 필요합니다", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         //측정시작
         bt_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!connected) {
-                    Toast.makeText(getApplicationContext(), "저울과 연결이 필요합니다", Toast.LENGTH_SHORT).show();
-                } else {
+                print_weight.setText("");
+
+                if (usbService.isServiceConnected()) {
                     String data = "1";
                     usbService.write(data.getBytes());
-                }
+                } else
+                    Toast.makeText(getApplicationContext(), "저울과 연결이 필요합니다", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -207,7 +221,7 @@ public class RecordUrineActivity extends BaseActivity {
                     Toast.makeText(getApplicationContext(), "잘못된 무게값입니다", Toast.LENGTH_SHORT).show();
 
                 else {
-                    Toast.makeText(getApplicationContext(), tmp + "g의 소변이 등록되었습니다", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), tmp + "cc의 소변이 등록되었습니다", Toast.LENGTH_SHORT).show();
                     MediPostRequest postRequest = new MediPostRequest(v.getContext(), pid, name,MediValues.OUTPUT, MediValues.URINE, Float.parseFloat(tmp), null );
                     Intent intent = new Intent(RecordUrineActivity.this, ReportActivity.class);
                     intent.putExtra("pid", pid);

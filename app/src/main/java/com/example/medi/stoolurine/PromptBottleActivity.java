@@ -17,9 +17,11 @@ public class PromptBottleActivity extends BaseActivity {
         Intent intent = getIntent();
         pid = intent.getStringExtra("pid");
 
-        String name= MediValues.patientData.get(pid).get("name");
-        TextView title_pname = findViewById(R.id.p_name);
-        title_pname.setText(name+" 님");
+        if(pid!=null) {
+            String name = MediValues.patientData.get(pid).get("name");
+            TextView title_pname = findViewById(R.id.p_name);
+            title_pname.setText(name + " 님");
+        }
 
         buttonPrev = (Button) findViewById(R.id.Bnt_prev);
         //buttonNext = (Button) findViewById(R.id.btnNext);

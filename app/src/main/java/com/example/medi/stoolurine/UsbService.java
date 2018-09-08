@@ -142,6 +142,12 @@ public class UsbService extends Service {
         }
     }
 
+    public boolean isServiceConnected(){
+        if(serialPort!=null)
+            return true;
+        else
+            return false;
+    }
     public void setHandler(Handler mHandler) {
         this.mHandler = mHandler;
     }
