@@ -50,7 +50,7 @@
                 android:id="@+id/bt_edit"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10sp"
-                android:text="  수정  "
+                android:text="  새로고침  "
                 android:textSize="30dp"
                 android:textColor="@color/White"
                 android:layout_marginVertical="10sp"
