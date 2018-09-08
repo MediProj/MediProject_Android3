@@ -217,15 +217,21 @@ public class RecordUrineActivity extends BaseActivity {
                 if (tmp.matches(""))
                     Toast.makeText(getApplicationContext(), "잘못된 무게값입니다", Toast.LENGTH_SHORT).show();
 
-                else if(Float.parseFloat(tmp)<=0)
-                    Toast.makeText(getApplicationContext(), "잘못된 무게값입니다", Toast.LENGTH_SHORT).show();
-
                 else {
-                    Toast.makeText(getApplicationContext(), tmp + "cc의 소변이 등록되었습니다", Toast.LENGTH_SHORT).show();
-                    MediPostRequest postRequest = new MediPostRequest(v.getContext(), pid, name,MediValues.OUTPUT, MediValues.URINE, Float.parseFloat(tmp), null );
-                    Intent intent = new Intent(RecordUrineActivity.this, ReportActivity.class);
-                    intent.putExtra("pid", pid);
-                    startActivity(intent);
+                    float weight = Float.parseFloat(tmp);
+                    int tmp_weight = (int) (weight*100);
+                    weight = (float) (tmp_weight/100.0);
+
+                    if (weight <= 0)
+                        Toast.makeText(getApplicationContext(), "잘못된 무게값입니다", Toast.LENGTH_SHORT).show();
+
+                    else {
+                        Toast.makeText(getApplicationContext(), String.valueOf(weight) + "cc의 소변이 등록되었습니다", Toast.LENGTH_SHORT).show();
+                        MediPostRequest postRequest = new MediPostRequest(v.getContext(), pid, name, MediValues.OUTPUT, MediValues.URINE, weight, null);
+                        Intent intent = new Intent(RecordUrineActivity.this, ReportActivity.class);
+                        intent.putExtra("pid", pid);
+                        startActivity(intent);
+                    }
                 }
             }
         });

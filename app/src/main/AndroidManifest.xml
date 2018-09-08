@@ -3,8 +3,7 @@
     package="com.example.medi.stoolurine">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-feature android:name="android.hardware.usb.host"
-        android:required="true"/>
+    <uses-feature android:name="android.hardware.usb.host"/>
 
     <application
         android:allowBackup="true"
