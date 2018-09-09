@@ -56,12 +56,11 @@
 
         <TextView
             android:id="@+id/tv"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
+            android:gravity="center"
             android:text="안녕하세요"
             android:textSize="40sp"
-            android:textStyle="bold"
             android:textColor="@color/Black"
             android:layout_centerInParent="true"/>
 

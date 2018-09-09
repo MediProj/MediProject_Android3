@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:weightSum="4"
     android:orientation="vertical"
-    android:background="#004B87">
+    android:background="@color/Blue">
 
     <TextView
         android:layout_width="match_parent"
@@ -34,7 +34,7 @@
             android:textStyle="bold"
             android:textSize="25sp"
             android:textColor="#FFFFFF"
-            android:background="#457b80"
+            android:background="@color/Green"
             android:layout_margin="5dp"/>
 
         <Button

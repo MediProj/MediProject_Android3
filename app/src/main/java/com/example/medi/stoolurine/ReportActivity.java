@@ -54,7 +54,7 @@ public class ReportActivity extends BaseActivity {
 
         queue = Volley.newRequestQueue(this);
         urlData = urlData.concat(pk);
-        getPatientRecords();
+        getPatientRecords("기록 조회 중입니다...");
 
         listView = findViewById(R.id.ReportList);
 
@@ -83,7 +83,7 @@ public class ReportActivity extends BaseActivity {
                 MediValues.pkRecordTag = null;
                 list.clear();
 
-                getPatientRecords();
+                getPatientRecords("새로고침 중입니다...");
             }
         });
 
@@ -99,23 +99,25 @@ public class ReportActivity extends BaseActivity {
     }
 
     public void fillList() {
-        for (int i = MediValues.patientRecord.length-1; i >=0 ; i--) {
+        for (int i =MediValues.patientRecord.length-1 ; i >=0 ; i--) {
             String date = MediValues.patientRecord[i].get("date");
             String time = MediValues.patientRecord[i].get("time");
             String type = MediValues.patientRecord[i].get("type");
             String amount = MediValues.patientRecord[i].get("amount");
+            String record_pk = MediValues.patientRecord[i].get("record_pk");
+
+            //소변&대변이 아니면 pass
+            if(!(type.contains("Voiding") || type.contains("대변"))) {
+                i--;
+                continue;
+            }
 
             //대변
-            if(type.equals("대변(환자 입력)")|| type.equals("대변(간호사 입력)"))
+            if(type.contains("대변"))
                 amount = "1회";
 
-            //소변
-            else if(type.equals("self voiding(환자 입력)") || type.equals("self voiding(간호사 입력)"))
+            if(type.contains("Voiding"))
                 amount = String.format("%.2f", Float.parseFloat(amount));
-
-            //나머지는 출력 안함
-            else
-                continue;
 
             StringTokenizer tok_date = new StringTokenizer(date, "-");
             date = String.format("%s/%s/%s", tok_date.nextToken(), tok_date.nextToken(), tok_date.nextToken());
@@ -123,7 +125,7 @@ public class ReportActivity extends BaseActivity {
             StringTokenizer tok_time = new StringTokenizer(time, ":");
             time = String.format("%s시 %s분", tok_time.nextToken(), tok_time.nextToken());
 
-            list.add(new ReportItem(date, time, type, amount));
+            list.add(new ReportItem(record_pk,date, time, type, amount));
         }
     }
 
@@ -172,10 +174,7 @@ public class ReportActivity extends BaseActivity {
             holder.tv_time.setText(list.get(i).getDate());
             holder.tv_tag.setText(list.get(i).getTag());
             holder.tv_val1.setText(list.get(i).getVal1());
-
-            if (!(list.get(i).getTag().equals("대변"))) {
-                holder.tv_val2.setText(list.get(i).getVal2());
-            }
+            holder.tv_val2.setText(list.get(i).getVal2());
 
             holder.bt_del.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -209,7 +208,7 @@ public class ReportActivity extends BaseActivity {
             delConfirm.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MediDeleteRequest delRecord = new MediDeleteRequest(MediValues.pkRecordTag[index], getApplicationContext());
+                    MediDeleteRequest delRecord = new MediDeleteRequest(list.get(index).getRecordPk(), getApplicationContext());
 
                     dialog.dismiss();
                     final ProgressDialog progress = new ProgressDialog(ReportActivity.this);
@@ -227,9 +226,9 @@ public class ReportActivity extends BaseActivity {
                         @Override
                         public void run() {
                             progress.dismiss();
-                            getPatientRecords();
+                            getPatientRecords("해당 기록이 삭제되었습니다");
                         }
-                    }, 5000);
+                    }, 2000);
                 }
             });
             //Here's the magic..
@@ -256,12 +255,12 @@ public class ReportActivity extends BaseActivity {
         Button bt_del;
     }
 
-    protected void getPatientRecords() {
+    protected void getPatientRecords(String msg) {
         MediGetRequest GETrequest = new MediGetRequest(pk, "records", this);
         final ProgressDialog progress = new ProgressDialog(this);
 
         progress.setTitle("로딩중");
-        progress.setMessage("기록 조회 중입니다...");
+        progress.setMessage(msg);
         progress.setCancelable(false);
         progress.show();
 
@@ -275,6 +274,6 @@ public class ReportActivity extends BaseActivity {
                 listViewAdapter = new ListViewAdapter(getApplicationContext(), list);
                 listView.setAdapter(listViewAdapter);
             }
-        }, 5000);
+        }, 2000);
     }
 }

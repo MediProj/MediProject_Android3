@@ -18,7 +18,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
 public class MediGetRequest {
     private String url  = "http://54.202.222.14/dashboard/patients/api/patients-dashboard/";
 
@@ -71,6 +70,7 @@ public class MediGetRequest {
 
                 MediValues.patientRecord[i] = new HashMap<>();
                 MediValues.pkRecordTag[i] = pk;
+                MediValues.patientRecord[i].put("record_pk", pk);
                 MediValues.patientRecord[i].put("date", date);
                 MediValues.patientRecord[i].put("time", time);
                 MediValues.patientRecord[i].put("type", type);
