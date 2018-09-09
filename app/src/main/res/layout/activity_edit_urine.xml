@@ -1,63 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/Back"
-    android:weightSum="10" android:layout_width="match_parent" android:layout_height="match_parent">
-
-
-    <RelativeLayout
-        style="@style/titleBanner">
-
-        <TextView
-            android:id="@+id/p_name"
-            style="@style/title_pname"/>
-
-        <TextView style="@style/title_jay" />
-
-        <ImageView
-            android:src="@drawable/white_logo_2"
-            style="@style/title_logo"/>
-    </RelativeLayout>
+    android:orientation="vertical"
+    android:weightSum="10">
 
     <LinearLayout
+        style="@style/Body"
+        android:layout_gravity="center"
+        android:layout_weight="8"
         android:gravity="center"
         android:orientation="vertical"
-        android:layout_weight="6"
-        android:layout_gravity="center"
-        style="@style/Body">
+        android:weightSum="3">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="날짜/시간"
-            style="@style/prompt"/>
+        <RelativeLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0sp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="소변 양상"
-            style="@style/prompt"/>
+            <TextView
+                android:id="@+id/tv"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/prompt"
+                android:text="기록을 수정해주세요"/>
+      </RelativeLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="소변양"
-            style="@style/prompt"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="6">
 
+            <TextView
+                android:layout_width="0sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="날짜/시간"
+                android:textAlignment="center"
+                android:textColor="@color/Black"
+                android:textSize="40sp" />
+
+            <TextView
+                android:id="@+id/time"
+                android:textAlignment="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:background="@color/Gray2"
+                android:textSize="40sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="6">
+
+            <TextView
+                android:layout_width="0sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="소변량"
+                android:textAlignment="center"
+                android:textColor="@color/Black"
+                android:textSize="40sp" />
+
+            <TextView
+                android:id="@+id/amount"
+                android:textAlignment="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:background="@color/Gray2"
+                android:textSize="40sp" />
+        </LinearLayout>
 
     </LinearLayout>
 
-    <RelativeLayout
-        style="@style/linearViewBot">
+    <RelativeLayout style="@style/linearViewBot">
         <Button
-            android:id="@+id/Bnt_prev"
+            android:id="@+id/editCancel"
             style="@style/buttonPrev"
-            android:text="취소"/>
-
+            android:text="취소" />
         <Button
-            android:id="@+id/Bnt_next"
+            android:id="@+id/editConfirm"
             style="@style/buttonNext"
-            android:text="수정"/>
+            android:text="수정" />
 
     </RelativeLayout>
 

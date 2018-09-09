@@ -34,6 +34,7 @@ public class ReportActivity extends BaseActivity {
     Button bt_prev, bt_edit;
     String name, pid, pk;
     Date date;
+    boolean editFlag=false;
 
     private RequestQueue queue;
     public static final String TAG = "ReportTAG";
@@ -166,6 +167,7 @@ public class ReportActivity extends BaseActivity {
                 holder.tv_val1 = view.findViewById(R.id.val1);
                 holder.tv_val2 = view.findViewById(R.id.val2);
                 holder.bt_del = view.findViewById(R.id.btn_delete);
+                holder.bt_edit=view.findViewById(R.id.btn_edit);
                 view.setTag(holder);
             } else {
                 holder = (ViewHolder) view.getTag();
@@ -176,6 +178,14 @@ public class ReportActivity extends BaseActivity {
             holder.tv_val1.setText(list.get(i).getVal1());
             holder.tv_val2.setText(list.get(i).getVal2());
 
+            holder.bt_edit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    EditAlertDialog editAlertDialog = new EditAlertDialog();
+                    editAlertDialog.showDialog(ReportActivity.this, i);
+                }
+            });
+
             holder.bt_del.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -183,7 +193,6 @@ public class ReportActivity extends BaseActivity {
                     delAlert.showDialog(ReportActivity.this, i);
                 }
             });
-
             return view;
         }
     }
@@ -249,10 +258,69 @@ public class ReportActivity extends BaseActivity {
         }
     }
 
+    public class EditAlertDialog {
 
+        public void showDialog(Activity activity, final int index) {
+            final Dialog dialog = new Dialog(activity);
+            dialog.setCancelable(false);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setContentView(R.layout.record_delete_prompt);
+
+            TextView tv=dialog.findViewById(R.id.tv);
+            tv.setText("기록을 수정하시겠습니까?\n한 번 수정하면 복구가 불가능합니다");
+
+            Button delCancel = (Button) dialog.findViewById(R.id.delCancel);
+            Button delConfirm = (Button) dialog.findViewById(R.id.delConfirm);
+            delConfirm.setText("수정");
+
+            delCancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    editFlag=false;
+                    dialog.dismiss();
+                }
+            });
+
+            delConfirm.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    MediDeleteRequest delRecord = new MediDeleteRequest(list.get(index).getRecordPk(), getApplicationContext());
+                    MediValues.patientRecord = null;
+                    MediValues.pkRecordTag = null;
+                    editFlag=true;
+                    dialog.dismiss();
+
+                    int type =0;
+
+                    if(list.get(index).getVal1().contains("Voiding"))
+                        type =1;
+
+                    Intent intent = new Intent(ReportActivity.this,TimeDateActivity.class );
+                    intent.putExtra("val", type);
+                    startActivity(intent);
+                }
+            });
+
+            //Here's the magic..
+            //Set the dialog to not focusable (makes navigation ignore us adding the window)
+            dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+
+            //Show the dialog!
+            dialog.show();
+
+            //Set the dialog to immersive
+            dialog.getWindow().getDecorView().setSystemUiVisibility(
+                    activity.getWindow().getDecorView().getSystemUiVisibility());
+
+            //Clear the not focusable flag from the window
+            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+
+            dialog.getWindow().setLayout(1200, 600);
+        }
+    }
     public class ViewHolder {
         TextView tv_time, tv_tag, tv_val1, tv_val2;
-        Button bt_del;
+        Button bt_del, bt_edit;
     }
 
     protected void getPatientRecords(String msg) {
