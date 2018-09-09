@@ -22,7 +22,7 @@ import java.util.Set;
 
 public class RecordUrineActivity extends BaseActivity {
     boolean connected = false;
-    static EditText print_weight;
+    static TextView print_weight;
     /*
      * Notifications from UsbService will be received here.
      */
@@ -166,7 +166,7 @@ public class RecordUrineActivity extends BaseActivity {
         title_pname.setText(name+" 님");
         TextView tv = findViewById(R.id.tv);
 
-        tv.setText("무게를 직접 입력하거나, 측정 버튼을 눌러 무게를 측정하세요\n( 영점 조절버튼은 저울에 아무것도 올려놓지 않은 상태에서 눌러주세요 )");
+        tv.setText("저울에 아무것도 올려놓지 않은 상태에서 0점조절 버튼을 누른뒤,\n 물건을 올려놓고 측정 버튼을 눌러 무게를 측정해 주세요");
 
         View decorView = getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
@@ -189,6 +189,8 @@ public class RecordUrineActivity extends BaseActivity {
                 if (usbService.isServiceConnected()) {
                     String data = "0";
                     usbService.write(data.getBytes());
+                    print_weight.setText("측정 가능");
+
                 } else
                     Toast.makeText(getApplicationContext(), "저울과 연결이 필요합니다", Toast.LENGTH_SHORT).show();
             }
@@ -215,7 +217,7 @@ public class RecordUrineActivity extends BaseActivity {
                 tmp.replace("ready", "");
 
                 if (tmp.matches(""))
-                    Toast.makeText(getApplicationContext(), "잘못된 무게값입니다", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "잘못된 무게값입니다. 다시 측정 버튼을 눌러주세요", Toast.LENGTH_SHORT).show();
 
                 else {
                     float weight = Float.parseFloat(tmp);
@@ -223,7 +225,7 @@ public class RecordUrineActivity extends BaseActivity {
                     weight = (float) (tmp_weight/100.0);
 
                     if (weight <= 0)
-                        Toast.makeText(getApplicationContext(), "잘못된 무게값입니다", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "잘못된 무게값입니다. 다시 측정 버튼을 눌러주세요", Toast.LENGTH_SHORT).show();
 
                     else {
                         Toast.makeText(getApplicationContext(), String.valueOf(weight) + "cc의 소변이 등록되었습니다", Toast.LENGTH_SHORT).show();

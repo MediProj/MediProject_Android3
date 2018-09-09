@@ -68,7 +68,6 @@ public class MediGetRequest {
                 String time = entry.getString("data_time");
                 String type = entry.getString("record_type");
                 String amount = entry.getString("amount");
-                amount = String.format("%.2f", Float.parseFloat(amount));
 
                 MediValues.patientRecord[i] = new HashMap<>();
                 MediValues.pkRecordTag[i] = pk;

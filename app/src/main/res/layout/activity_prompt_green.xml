@@ -18,8 +18,18 @@
             style="@style/title_logo"/>
     </RelativeLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:layout_weight="1"
+        android:textAlignment="center"
+        android:textColor="@color/Black"
+        android:textSize="30sp"
+        android:gravity="bottom"
+        android:text="아래와 같은 방법으로 무게를 측정합니다"/>
+
     <LinearLayout
-        android:layout_weight="6"
+        android:layout_weight="5"
         android:layout_height="0sp"
         style="@style/layoutHoriz"
         android:orientation="vertical" >

@@ -99,11 +99,23 @@ public class ReportActivity extends BaseActivity {
     }
 
     public void fillList() {
-        for (int i = 0; i < MediValues.patientRecord.length; i++) {
+        for (int i = MediValues.patientRecord.length-1; i >=0 ; i--) {
             String date = MediValues.patientRecord[i].get("date");
             String time = MediValues.patientRecord[i].get("time");
             String type = MediValues.patientRecord[i].get("type");
             String amount = MediValues.patientRecord[i].get("amount");
+
+            //대변
+            if(type.equals("대변(환자 입력)")|| type.equals("대변(간호사 입력)"))
+                amount = "1회";
+
+            //소변
+            else if(type.equals("self voiding(환자 입력)") || type.equals("self voiding(간호사 입력)"))
+                amount = String.format("%.2f", Float.parseFloat(amount));
+
+            //나머지는 출력 안함
+            else
+                continue;
 
             StringTokenizer tok_date = new StringTokenizer(date, "-");
             date = String.format("%s/%s/%s", tok_date.nextToken(), tok_date.nextToken(), tok_date.nextToken());
