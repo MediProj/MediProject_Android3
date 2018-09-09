@@ -100,7 +100,8 @@ public class ReportActivity extends BaseActivity {
     }
 
     public void fillList() {
-        for (int i =MediValues.patientRecord.length-1 ; i >=0 ; i--) {
+
+        for (int i =  0; i <MediValues.patientRecord.length; i++) {
             String date = MediValues.patientRecord[i].get("date");
             String time = MediValues.patientRecord[i].get("time");
             String type = MediValues.patientRecord[i].get("type");
@@ -109,7 +110,6 @@ public class ReportActivity extends BaseActivity {
 
             //소변&대변이 아니면 pass
             if(!(type.contains("Voiding") || type.contains("대변"))) {
-                i--;
                 continue;
             }
 
@@ -126,7 +126,7 @@ public class ReportActivity extends BaseActivity {
             StringTokenizer tok_time = new StringTokenizer(time, ":");
             time = String.format("%s시 %s분", tok_time.nextToken(), tok_time.nextToken());
 
-            list.add(new ReportItem(record_pk,date, time, type, amount));
+            list.add(new ReportItem(record_pk, date, time, type, amount));
         }
     }
 
@@ -290,10 +290,10 @@ public class ReportActivity extends BaseActivity {
                     editFlag=true;
                     dialog.dismiss();
 
-                    int type =0;
+                    int type =2;
 
                     if(list.get(index).getVal1().contains("Voiding"))
-                        type =1;
+                        type =3;
 
                     Intent intent = new Intent(ReportActivity.this,TimeDateActivity.class );
                     intent.putExtra("val", type);
