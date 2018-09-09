@@ -219,6 +219,25 @@ public class RecordUrineActivity extends BaseActivity {
                 if (usbService.isServiceConnected()) {
                     String data = "1";
                     usbService.write(data.getBytes());
+                    final ProgressDialog progress = new ProgressDialog(v.getContext());
+
+                    progress.setMessage("무게를 측정중입니다...");
+                    progress.setCancelable(false);
+                    progress.show();
+
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            progress.dismiss();
+                            String tmp = (print_weight.getText().toString());
+                            tmp.replace("X", "");
+                            if( tmp.matches(""))
+                                Toast.makeText(getApplicationContext(), "다시 측정해주세요", Toast.LENGTH_SHORT).show();
+                        }
+                    }, 5000);
+
+
                 } else
                     Toast.makeText(getApplicationContext(), "저울과 연결이 필요합니다", Toast.LENGTH_SHORT).show();
             }
