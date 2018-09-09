@@ -79,10 +79,6 @@
             android:screenOrientation="landscape">
         </activity>
 
-        <activity android:name=".EditRecordActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="landscape"/>
-
         <service
             android:name="com.example.medi.stoolurine.UsbService"
             android:enabled="true">
