@@ -36,7 +36,7 @@ public class RecordUrineActivity extends BaseActivity {
         public void onReceive(Context context, Intent intent) {
             switch (intent.getAction()) {
                 case UsbService.ACTION_USB_PERMISSION_GRANTED: // USB PERMISSION GRANTED
-                    Toast.makeText(context, "측정 버튼을 눌러주세요", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "저울과 연결되었습니다", Toast.LENGTH_SHORT).show();
                     connected = true;
                     break;
 
@@ -171,7 +171,7 @@ public class RecordUrineActivity extends BaseActivity {
         title_pname.setText(name+" 님");
         TextView tv = findViewById(R.id.tv);
 
-        tv.setText("저울에 아무것도 올려놓지 않은 상태에서 0점조절 버튼을 누른뒤,\n 물건을 올려놓고 측정 버튼을 눌러 무게를 측정해 주세요");
+        tv.setText("저울에 아무 것도 올려 놓지 않은 상태에서 0점조절 버튼을 누른뒤,\n 물건을 올려놓고 측정 버튼을 눌러 무게를 측정해 주세요");
 
         View decorView = getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
@@ -203,7 +203,7 @@ public class RecordUrineActivity extends BaseActivity {
                 if (usbService.isServiceConnected()) {
                     String data = "0";
                     usbService.write(data.getBytes());
-                    print_weight.setText("측정 가능");
+                    Toast.makeText(getApplicationContext(), "0점 조절이 되었습니다.\n물건을 올리고 측정 버튼을 눌러주세요", Toast.LENGTH_SHORT).show();
 
                 } else
                     Toast.makeText(getApplicationContext(), "저울과 연결이 필요합니다", Toast.LENGTH_SHORT).show();
