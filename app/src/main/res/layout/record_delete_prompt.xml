@@ -4,16 +4,16 @@
     android:layout_height="match_parent"
     android:weightSum="4"
     android:orientation="vertical"
-    android:background="@color/Blue">
+    android:layout_margin="20sp"
+    android:background="@color/Back">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0px"
         android:layout_weight="3"
         android:text="@string/delPrompt"
-        android:textStyle="bold"
-        android:textColor="#FFFFFF"
-        android:textSize="30sp"
+        android:textColor="@color/Black"
+        android:textSize="40sp"
         android:textAlignment="center"
         android:gravity="center_vertical"
         android:layout_margin="5dp"

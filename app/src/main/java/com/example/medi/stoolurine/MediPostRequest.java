@@ -43,7 +43,6 @@ public class MediPostRequest {
         this.date = MediValues.mediDate;
         this.time = MediValues.mediTime;
 
-
         int int_amt = (int)amount*100;
         this.amount= int_amt/100;
 

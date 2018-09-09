@@ -1,5 +1,8 @@
 package com.example.medi.stoolurine;
 
+import android.app.Activity;
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -11,6 +14,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,6 +27,7 @@ import java.util.Set;
 public class RecordUrineActivity extends BaseActivity {
     boolean connected = false;
     static TextView print_weight;
+    String weight_edited="";
     /*
      * Notifications from UsbService will be received here.
      */
@@ -183,6 +188,15 @@ public class RecordUrineActivity extends BaseActivity {
         Button bt_next = findViewById(R.id.Btn_next);
         Button bt_prev = findViewById(R.id.Btn_prev);
 
+        print_weight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditAlertDialog editAlertDialog = new EditAlertDialog();
+                editAlertDialog.showDialog(RecordUrineActivity.this);
+                print_weight.setText(weight_edited);
+            }
+        });
+
         bt_zero.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -247,4 +261,54 @@ public class RecordUrineActivity extends BaseActivity {
             }
         });
     }
+
+
+    public class EditAlertDialog {
+
+        public void showDialog(Activity activity) {
+            final Dialog dialog = new Dialog(activity);
+            dialog.setCancelable(false);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setContentView(R.layout.urine_edit_prompt);
+
+            final EditText et_weight = dialog.findViewById(R.id.et_weight);
+
+            Button editCancel = (Button) dialog.findViewById(R.id.editCancel);
+            editCancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+
+            Button editConfirm = (Button) dialog.findViewById(R.id.editConfirm);
+            editConfirm.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String weight = et_weight.getText().toString();
+
+                    if(weight.matches(""))
+                        Toast.makeText(v.getContext(), "무게를 입력해주세요", Toast.LENGTH_SHORT).show();
+
+                    else {
+                        print_weight.setText(weight);
+                        weight_edited = weight;
+                        dialog.dismiss();
+                    }
+                }
+            });
+
+            dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+
+            dialog.show();
+
+            dialog.getWindow().getDecorView().setSystemUiVisibility(
+                    activity.getWindow().getDecorView().getSystemUiVisibility());
+
+            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+
+            dialog.getWindow().setLayout(1200, 600);
+        }
+    }
+
 }
